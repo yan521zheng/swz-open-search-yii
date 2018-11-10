@@ -1,0 +1,21 @@
+{
+  "name": "swz/opensearch",
+  "description": "阿里开放搜索资源包",
+  "type": "yii2-extension",
+  "keywords": ["yii2","extension","opensearch"],
+  "license": "BSD-4-Clause",
+  "authors": [
+    {
+      "name": "swz",
+      "email": "yan521zheng@163.com"
+    }
+  ],
+  "require": {
+    "yiisoft/yii2": "~2.0.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "swz\\opensearch\\": "src"
+    }
+  }
+}
