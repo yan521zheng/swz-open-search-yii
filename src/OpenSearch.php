@@ -97,7 +97,6 @@ class OpenSearch extends Component
         }
         return false;
     }
-
     /**
      * 获取搜索参数类
      * @return null
