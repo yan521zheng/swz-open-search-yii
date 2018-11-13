@@ -13,7 +13,8 @@ use OpenSearch\Util\SearchParamsBuilder;
 use yii\base\Component;
 
 header("Content-Type:text/html;charset=utf-8");
-require_once("OpenSearch/Autoloader/Autoloader.php");
+$basePath = __DIR__ . '/../';
+require_once($basePath."OpenSearch/Autoloader/Autoloader.php");
 
 /**
  * Class OpenSearch

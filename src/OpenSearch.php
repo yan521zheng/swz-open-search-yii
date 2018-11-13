@@ -7,7 +7,8 @@
  */
 
 namespace swz\opensearch;
-require_once("OpenSearch/Autoloader/Autoloader.php");
+$basePath = __DIR__ . '/../';
+require_once($basePath."OpenSearch/Autoloader/Autoloader.php");
 use OpenSearch\Client\OpenSearchClient;
 use OpenSearch\Client\SearchClient;
 use OpenSearch\Generated\Search\SearchParams;
