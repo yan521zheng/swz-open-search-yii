@@ -55,7 +55,6 @@ class OpenSearch extends Component
             throw new \Exception('appName is empty');
         }
     }
-
     /**
      * 获取SearchClient
      * @return SearchClient
