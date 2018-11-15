@@ -31,7 +31,7 @@ class OpenSearch extends Component
     public $hit = 200;
     //指定应用用于搜索
     public $appName;
-    //搜索索引
+    //搜索索引,默认为default
     public $searchIndex = 'default';
     //搜索关键词
     public $keyWords;
