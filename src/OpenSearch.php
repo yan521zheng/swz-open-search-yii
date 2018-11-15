@@ -14,6 +14,7 @@ use OpenSearch\Client\SearchClient;
 use OpenSearch\Generated\Search\SearchParams;
 use OpenSearch\Util\SearchParamsBuilder;
 use yii\base\Component;
+use yii\helpers\ArrayHelper;
 use yii\web\BadRequestHttpException;
 
 /**
@@ -27,7 +28,7 @@ class OpenSearch extends Component
     //设置config子句的start值
     public $searchStart = 0;
     //设置config子句的hit值
-    public $hit = 20;
+    public $hit = 200;
     //指定应用用于搜索
     public $appName;
     //搜索索引
@@ -38,6 +39,8 @@ class OpenSearch extends Component
     public $format = 'fulljson';
     //排序字段
     public $sorts;
+    //过滤条件
+    public $filters;
 
     public $_searchClient;
 
@@ -91,12 +94,13 @@ class OpenSearch extends Component
             return false;
         }
         if ($result['status'] == 'OK') {
-            return $result['result'];
+            return ArrayHelper::getColumn($result['result']['items'],'fields');
         }else{
             throw new BadRequestHttpException($result['errors'][0]['message'],$result['errors'][0]['code']);
         }
         return false;
     }
+
     /**
      * 获取搜索参数类
      * @return null
@@ -112,8 +116,18 @@ class OpenSearch extends Component
             $params->setStart($this->searchStart);
             $params->setHits($this->hit);
             $params->setAppName($this->appName);
-            $params->setQuery($this->searchIndex.":".$this->keyWords);
+            $params->setQuery($this->searchIndex.":'".$this->keyWords."'");
             $params->setFormat($this->format);
+            //过滤条件
+            if ($this->filters){
+                if (is_array($this->filters)){
+                    foreach ($this->filters as $filter){
+                        $params->addFilter($filter);
+                    }
+                }else{
+                    $params->setFilter($this->filters);
+                }
+            }
             //添加排序字段
             if ($this->sorts){
                 if (is_array($this->sorts) && !$this->sorts['field']){
