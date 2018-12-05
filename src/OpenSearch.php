@@ -94,7 +94,7 @@ class OpenSearch extends Component
             return false;
         }
         if ($result['status'] == 'OK') {
-            return ArrayHelper::getColumn($result['result']['items'],'fields');
+            return $result['result'];
         }else{
             throw new BadRequestHttpException($result['errors'][0]['message'],$result['errors'][0]['code']);
         }
