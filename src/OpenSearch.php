@@ -94,6 +94,7 @@ class OpenSearch extends Component
             return false;
         }
         if ($result['status'] == 'OK') {
+
             return $result['result'];
         }else{
             throw new BadRequestHttpException($result['errors'][0]['message'],$result['errors'][0]['code']);
